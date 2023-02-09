@@ -1,7 +1,9 @@
 package com.employee.card;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,8 +17,13 @@ public class myController {
     }
 
     @RequestMapping("/outputData")
-    public String outputEmployeeData(@ModelAttribute("employee") Employee emp){
-        return "output-employee-data-view";
+    public String outputEmployeeData(@Valid @ModelAttribute("employee") Employee emp,
+                                     BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "entry-employee-data-view";
+        } else {
+            return "output-employee-data-view";
+        }
     }
 
 }

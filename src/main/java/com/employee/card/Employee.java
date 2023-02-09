@@ -1,12 +1,20 @@
 package com.employee.card;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Employee {
 
+    @NotBlank(message = "The Name field must not be empty")
     private String name;
+    @NotBlank(message = "The Surname field must not be empty")
     private String surname;
+    @Max(value = 1200, message = "Max salary 1200")
+    @Min(value = 500, message = "Min salary 500")
     private int salary;
     private String department;
     private String language;
